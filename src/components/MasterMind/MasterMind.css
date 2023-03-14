@@ -1,0 +1,161 @@
+.masterMindBody { 
+    background-color: grey;
+    margin: auto;
+    width: 50%;
+    border-radius: 32px;
+    padding-top:16px;
+    margin-top: 32px;
+    border: 8px solid rgb(119, 198, 224)
+}
+
+.table {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    border-top: 8px solid rgb(119, 198, 224);
+}
+
+.masterMindRow {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 24px;
+}
+
+.masterMindGuess {
+    background-color: rgb(158, 158, 158);
+    border: 2px solid rgb(82, 82, 82);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer
+}
+
+.hint {
+    background-color: rgb(158, 158, 158);
+    border: 2px solid rgb(82, 82, 82);
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    border-radius: 50%;
+}
+
+.masterMindTopHints, .masterMindBottomHints {
+    display: flex;
+    justify-content: center;
+}
+
+.masterMindTopHints {
+    margin-bottom: 8px;
+}
+
+.masterMindTurn {
+    margin-bottom: 16px;
+    margin-top: 0px;
+}
+
+.masterMind {
+    display: flex;
+    justify-content: space-around;
+}
+
+.colorSelection {
+    position: fixed;
+    background-color: grey;
+    padding: 40px;
+    left: 0px;
+    bottom: 100px;
+    border-bottom-right-radius: 32px;
+    border-top-right-radius: 32px;
+    border: 4px solid rgb(119, 198, 224);
+}
+
+.color {
+    cursor: grab;
+    width: 50px;
+    height: 50px;
+    /* border-radius: 50%; */
+    border: 4px solid rgb(82, 82, 82);
+    margin-bottom: 24px;
+}
+
+#red {
+    background-color: rgb(204, 102, 102);
+}
+
+#blue {
+    background-color: rgb(110, 160, 177);
+}
+
+#salmon {
+    background-color: lightsalmon;
+}
+
+#yellow {
+    background-color: rgb(208, 208, 150);
+}
+
+#green {
+    background-color: rgb(32, 120, 115);
+}
+
+#black {
+    background-color: rgb(43, 42, 42);
+}
+
+.red {
+    background-color: rgb(204, 102, 102);
+}
+
+.blue {
+    background-color: rgb(110, 160, 177);
+}
+
+.salmon {
+    background-color: lightsalmon;
+}
+
+.yellow {
+    background-color: rgb(208, 208, 150);
+}
+
+.green {
+    background-color: rgb(32, 120, 115);
+}
+
+.black {
+    background-color: rgb(43, 42, 42);
+}
+
+.submit {
+    position: fixed;
+    background-color: grey;
+    padding: 20px;
+    right: 0px;
+    bottom: 400px;
+    border-bottom-left-radius: 32px;
+    border-top-left-radius: 32px;
+    border: 4px solid rgb(119, 198, 224);
+}
+
+.checkAnswers {
+    background-color: rgb(119, 198, 224);
+    margin: 0;
+    padding: 10px;
+    padding-left: 20px;
+    border-bottom-left-radius: 32px;
+    border-top-left-radius: 32px;
+    cursor: pointer;
+}
+
+.correct {
+    background-color: red;
+}
+
+.correctColor {
+    background-color: white;
+}
+
+.completedRow {
+    background-color: darkgrey;
+}

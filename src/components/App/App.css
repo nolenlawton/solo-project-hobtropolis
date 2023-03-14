@@ -1,112 +1,94 @@
-html,
-body,
-#react-root {
-  height: 100%;
+@import url('https://fonts.googleapis.com/css?family=Yomogi');
+
+body {
+    margin: 0px;
+    font-family: 'Yomogi';
+}
+.admin {
+    display: flex;
+    justify-content: space-around;
+    margin: 0px;
+}
+
+.adminHelp {
+    background-color: rgb(119, 198, 224);
+    opacity: 90%;
+    padding: 16px;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0px;
+    background-image: url("../art/starry-pixels.webp");
+    background-repeat: repeat;
 }
 
-img {
-  display: inline-block;
-  max-width: 100%;
+h2 {
+    background-color: rgb(119, 198, 224);
+    margin: auto;
+    width: 20%;
+    border-radius: 16px;
+    margin-top: 64px;
+    padding: 32px;
+    text-align: center;
+
 }
 
-/* --------------------------------------------------------------------------------
-Container
--------------------------------------------------------------------------------- */
-
-.container {
-  padding: 20px;
+.gameToSelect {
+    background-color: rgb(119, 198, 224);
+    position: relative;
+    width: 256px;
+    height: 256px;
+    margin-top: 64px;
+    margin-bottom: 64px;
+    border-radius: 32px;
+    text-align: center;
 }
 
-/* --------------------------------------------------------------------------------
-Button
--------------------------------------------------------------------------------- */
+.topGameSelect, .bottomGameSelect {
+    display: flex;
+    justify-content: space-around;
+}
 
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
-  border-color: #014041;
-  border-width: 1px 1px 3px;
-  border-radius: 4px;
-  background-color: #00acb0;
-  color: #f8f8f8;
-  font-size: 1.1rem;
-  outline: 0;
+
+input{
+  border-radius: 16px;
+  border: 0px;
+  padding: 8px;
+  margin: 8px;
+  text-align: center;
+}
+
+.login, .register, button{
+  cursor: pointer
+}
+
+.login, .register {
+  width: 200px;
+  border: 2px solid ;
+  margin: 16px
+}
+
+p {
+  font-size: 16px;
+  padding-top: 16px;
+  border-top: 2px solid;
+}
+
+h3 {
+  border-bottom: 2px solid;
+}
+
+button {
+  background-color: rgb(119, 198, 224);
+  border: 0px;
+  border-bottom: 2px solid;
+  font-style: italic;
+}
+
+span {
+  position: fixed;
+  right: 8px;
+  top: 8px;
+  border-bottom: 2px solid;
+  font-style: italic;
   cursor: pointer;
-}
-
-.btn_sizeMin {
-  min-height: 50px;
-  min-width: 100px;
-}
-
-.btn_sizeSm {
-  padding: 10px 15px;
-  font-size: 0.8rem;
-}
-
-.btn_sizeFull {
-  display: block;
-  width: 100%;
-}
-
-.btn:hover {
-  background-color: #008183;
-  text-decoration: none;
-}
-
-/* This line makes the "Register" and "Login" buttons look like links */
-.btn_asLink {
-  padding: 0;
-  border-width: 0;
-  border-bottom: 1px solid #444;
-  border-radius: 0;
-  background: none;
-  font: inherit;
-  color: #444;
-}
-
-.btn_asLink:hover {
-  background-color: transparent;
-  border-color: #008183;
-  color: #008183;
-}
-
-/* --------------------------------------------------------------------------------
-Alert
--------------------------------------------------------------------------------- */
-
-.alert {
-  box-sizing: border-box;
-  padding: 15px 10px;
-  margin: 15px 0;
-  border: 2px solid #e01616;
-  background-color: #efefef;
-  border-radius: 3px;
-  color: #e01616;
-  font-size: 0.8rem;
-}
-
-/* --------------------------------------------------------------------------------
-Form Treatment
--------------------------------------------------------------------------------- */
-
-.formPanel {
-  box-sizing: border-box;
-  width: 400px;
-  max-width: 100%;
-  padding: 25px;
-  margin: 0 auto 20px;
-  background-color: #efefef;
-  border-radius: 3px;
-  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
-}
-
-input {
-  margin: 5px;
-  margin-bottom: 10px;
 }

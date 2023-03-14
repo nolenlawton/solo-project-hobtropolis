@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginForm from '../LoginForm/LoginForm';
+import LoginForm from './LoginForm/LoginForm';
 import { useHistory } from 'react-router-dom';
 
 function LoginPage() {
@@ -7,19 +7,14 @@ function LoginPage() {
 
   return (
     <div>
-      <LoginForm />
-
-      <center>
-        <button
-          type="button"
-          className="btn btn_asLink"
-          onClick={() => {
-            history.push('/registration');
-          }}
-        >
+      <h2>
+        <LoginForm />
+      
+        <p>don't have an account?</p>
+        <button type="button" onClick={() => {history.push('/registration')}}>
           Register
         </button>
-      </center>
+      </h2>
     </div>
   );
 }
