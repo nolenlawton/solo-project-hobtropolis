@@ -17,3 +17,9 @@ td {
     padding: 32px
 }
 
+.delete {
+    margin-top: 42px;
+    padding-right: 16px;
+    padding: 0;
+}
+

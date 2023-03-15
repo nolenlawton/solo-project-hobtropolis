@@ -178,7 +178,7 @@ function MasterMind () {
             payload: {round, game_id}
         })
 
-        history.push('/leaderBoard')
+        history.push({pathname: '/leaderBoard', state: round})
     }
 
 
