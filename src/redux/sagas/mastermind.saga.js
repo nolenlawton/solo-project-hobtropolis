@@ -12,8 +12,22 @@ function* addScore(action) {
     }
 }
 
+function* getScores() {
+    try {
+        const results = yield axios.get('/masterMind');
+
+        const scores = results.data
+
+        yield put({ type: 'SET_SCORES', payload: scores });
+
+    } catch {
+        console.log('get all error');
+    }
+}
+
 function* masterMindSaga() {
     yield takeEvery('ADD_SCORE', addScore);
+    yield takeEvery('GET_SCORES', getScores)
 }
 
 export default masterMindSaga

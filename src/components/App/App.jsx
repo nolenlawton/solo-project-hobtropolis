@@ -10,6 +10,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import LogoutButton from '../LogOutButton/LogOutButton'
 import SelectGame from '../SelectGame/SelectGame';
 import MasterMind from '../MasterMind/MasterMind'
+import LeaderBoard from '../LeaderBoard/LeaderBoard';
 
 
 import './App.css';
@@ -48,8 +49,6 @@ function App() {
 
         <Switch>
 
-
-
           <Route exact path="/login">
             {user.id ?
               <Redirect to="/" />
@@ -77,6 +76,14 @@ function App() {
           <Route path='/masterMind' exact>
           {user.id ?
               <MasterMind />
+              :
+              <Redirect to="/login" />
+            }
+          </Route>
+
+          <Route path='/leaderBoard' exact>
+          {user.id ?
+              <LeaderBoard />
               :
               <Redirect to="/login" />
             }

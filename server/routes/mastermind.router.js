@@ -6,7 +6,19 @@ const router = express.Router();
  * GET route template
  */
 router.get('/', (req, res) => {
-  // GET route code here
+    const query = `
+        SELECT "user".username, "game".game, "score".score FROM "score" 
+        JOIN "user" ON "user".id = "score".user_id
+        JOIN "game" ON "game".id = "score".game_id
+        ORDER BY "score" ASC
+        LIMIT 5;`
+  
+    pool.query(query)
+    .then(result => {
+        res.send(result.rows)
+    }).catch(err => {
+        res.sendStatus(500)
+      })
 });
 
 /**
@@ -14,7 +26,7 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
     console.log('round ', req.body)
-    console.log('user_id', req.user.id)
+    console.log('POST')
 
     const query = `
     INSERT INTO "score" ("score", "game_id", "user_id")
@@ -30,16 +42,3 @@ router.post('/', (req, res) => {
 });
 
 module.exports = router;
-router.post('/', (req, res) => {
-
-    const insertMovieQuery = `
-    INSERT INTO "movies" ("title", "poster", "description")
-    VALUES ($1, $2, $3)
-    RETURNING "id";`
-  
-    pool.query(insertMovieQuery, [req.body.title, req.body.poster, req.body.description])
-    .then(result => {
-    }).catch(err => {
-        res.sendStatus(500)
-      })
-    })

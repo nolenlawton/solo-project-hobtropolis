@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { useHistory } from "react-router-dom";
 import Round from './Round'
+
 import './MasterMind.css'
 
 import { useDispatch } from 'react-redux'
@@ -12,6 +14,7 @@ function MasterMind () {
     const [guesses, setGuesses] = useState([])
     const [winner, setWinner] = useState(false)
     const dispatch = useDispatch()
+    let history = useHistory()
 
 // handles drag and drop funcitionality
     const handleOnDrag = (event) => {
@@ -78,14 +81,6 @@ function MasterMind () {
 
         console.log('answers: ', answers)
 
-        if (winner === true){
-            const game_id = 1
-
-            dispatch({
-                type: 'ADD_SCORE',
-                payload: {round, game_id}
-            })
-        }
 
         // checks guesses if they are in correct position
         guessesArray.forEach((guess, i) => {
@@ -175,6 +170,17 @@ function MasterMind () {
         }
     }
 
+    const leaderBoard = () => {
+        const game_id = 1
+
+        dispatch({
+            type: 'ADD_SCORE',
+            payload: {round, game_id}
+        })
+
+        history.push('/leaderBoard')
+    }
+
 
     // adds rows based on rounds
     let rows = []
@@ -193,8 +199,9 @@ function MasterMind () {
                     <h2 className='masterMindTurn'>{winner ? `Winner!` : `Round ${round}`}</h2>
                     <div className='table'>
 
-                    {/* game rows */}
-                        {rows}
+                    {/* game rows // game leaderboard */}
+                    {rows}
+
                         
                 </div>
         </div>
@@ -236,7 +243,11 @@ function MasterMind () {
 
         {/* check answers */}
                 <div className='submit'>
-                    <h3 onClick={checkAnswers} className='checkAnswers'>{winner ? `Next!` : `Check Answers`}</h3>
+                {
+                winner ? <h3 onClick={leaderBoard} className='checkAnswers'>Next</h3>
+
+                : <h3 onClick={checkAnswers} className='checkAnswers'>Check Answers</h3>
+                }
                 </div>
             </div>
         </ div>

@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 function LogOutButton({user}) {
   const dispatch = useDispatch();
 
-  console.log(user)
   return (
     <span>
       <div id='user'>

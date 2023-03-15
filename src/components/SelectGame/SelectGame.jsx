@@ -25,6 +25,10 @@ function SelectGame () {
                 <div className="gameToSelect">Basketball</div>
             </Link>
         </div>
+
+        <Link to='leaderBoard'>
+            <h2>LeaderBoard</h2>
+        </Link>
         </>
     )
 }
