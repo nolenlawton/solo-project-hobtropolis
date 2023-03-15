@@ -47,4 +47,26 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+router.put('/', (req, res) => {
+  const id = req.user.id
+  const pfp = req.body.pfp
+
+
+  console.log('id ', id)
+  console.log('pfp ', pfp)
+  
+  query = `
+    UPDATE "user"
+    SET "pfp" = $1
+    WHERE "user".id = $2;`
+
+  params = [pfp , id]
+
+  pool.query(query, params)
+    .then(() => res.sendStatus(201))
+    .catch((err) => {
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;

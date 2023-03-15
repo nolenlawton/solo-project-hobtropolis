@@ -11,6 +11,7 @@ import LogoutButton from '../LogOutButton/LogOutButton'
 import SelectGame from '../SelectGame/SelectGame';
 import MasterMind from '../MasterMind/MasterMind'
 import LeaderBoard from '../LeaderBoard/LeaderBoard';
+import ProfilePicture from '../ProfilePicture/ProfilePicture';
 
 
 import './App.css';
@@ -84,6 +85,14 @@ function App() {
           <Route path='/leaderBoard' exact>
           {user.id ?
               <LeaderBoard />
+              :
+              <Redirect to="/login" />
+            }
+          </Route>
+
+          <Route path='/profilePicture' exact>
+          {user.id ?
+              <ProfilePicture />
               :
               <Redirect to="/login" />
             }
