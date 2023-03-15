@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import game1Image from '../art/mastermind.png'
 
 function SelectGame () {
     return (
@@ -6,7 +7,10 @@ function SelectGame () {
         <h2>SELECT GAME</h2>
         <div className="topGameSelect">
             <Link to='/masterMind'>
-                <div className="gameToSelect">Master Mind</div>
+                <div className="gameToSelect">
+                    Master Mind
+                    {/* <img src={game1Image} /> */}
+                </div>
             </Link>
 
             <Link to='/sudoku'>

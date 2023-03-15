@@ -86,9 +86,37 @@ button {
 
 span {
   position: fixed;
-  right: 8px;
-  top: 8px;
+  right: 0px;
+  top: 0px;
+  background-color: rgb(119, 198, 224);
+  padding: 16px;
+  border-bottom-left-radius: 16px;
+  
+}
+
+.home {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background-color: rgb(119, 198, 224);
+  padding: 16px;
+  border-bottom-right-radius: 16px;
+  cursor: pointer
+}
+
+#user {
+  font-weight: 900;
+}
+
+#logout {
   border-bottom: 2px solid;
   font-style: italic;
   cursor: pointer;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+  border-radius: 16px;
+  margin-top: 16px;
 }

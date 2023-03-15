@@ -1,17 +1,18 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-function LogOutButton(props) {
+function LogOutButton({user}) {
   const dispatch = useDispatch();
+
+  console.log(user)
   return (
-    <span
-      // This button shows up in multiple locations and is styled differently
-      // because it's styled differently depending on where it is used, the className
-      // is passed to it from it's parents through React props
-      className={props.className}
-      onClick={() => dispatch({ type: 'LOGOUT' })}
-    >
-      Log Out
+    <span>
+      <div id='user'>
+        {user.username}
+      </div>
+      <div id='logout' onClick={() => dispatch({ type: 'LOGOUT' })}>
+        Log Out 
+      </div>
     </span>
   );
 }

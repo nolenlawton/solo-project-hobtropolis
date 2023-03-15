@@ -79,9 +79,11 @@ function MasterMind () {
         console.log('answers: ', answers)
 
         if (winner === true){
+            const game_id = 1
+
             dispatch({
                 type: 'ADD_SCORE',
-                payload: round
+                payload: {round, game_id}
             })
         }
 

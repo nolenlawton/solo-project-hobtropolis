@@ -2,7 +2,14 @@ import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* addScore(action) {
-    console.log(action.payload)
+    try {
+        yield axios.post('/masterMind', action.payload);
+
+        yield put({ type: 'SET_SCORES' });
+
+    } catch {
+        console.log('get all error');
+    }
 }
 
 function* masterMindSaga() {

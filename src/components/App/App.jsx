@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Redirect, Route, Switch, Link} from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
 
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -9,10 +11,12 @@ import LogoutButton from '../LogOutButton/LogOutButton'
 import SelectGame from '../SelectGame/SelectGame';
 import MasterMind from '../MasterMind/MasterMind'
 
+
 import './App.css';
 
 function App() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const user = useSelector(store => store.user);
 
@@ -30,8 +34,12 @@ function App() {
 
           <h1 className="admin">hobtropolis</h1>
 
-        {user ?
-          <LogoutButton /> : <></>
+        {user.id ?
+            <>
+              <Link to='/' className='home'>Home</Link>
+              <LogoutButton user={user} />
+            </>
+            : <></>
         } 
 
         </div>
@@ -62,12 +70,16 @@ function App() {
             {user.id ?
               <SelectGame />
               :
-              <LoginPage />
+              <Redirect to="/login" />
             }
           </Route>
 
           <Route path='/masterMind' exact>
-            <MasterMind />
+          {user.id ?
+              <MasterMind />
+              :
+              <Redirect to="/login" />
+            }
           </Route>
 
         </Switch>
