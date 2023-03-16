@@ -159,3 +159,7 @@
 .completedRow {
     background-color: darkgrey;
 }
+
+#timer {
+    font-size: 12px;
+}

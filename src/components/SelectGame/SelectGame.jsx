@@ -9,7 +9,7 @@ function SelectGame () {
             <Link to='/masterMind'>
                 <div className="gameToSelect">
                     Master Mind
-                    {/* <img src={game1Image} /> */}
+                    <img src={game1Image} />
                 </div>
             </Link>
 

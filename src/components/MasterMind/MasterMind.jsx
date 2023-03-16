@@ -13,8 +13,20 @@ function MasterMind () {
     const [round, setRound] = useState(1)
     const [guesses, setGuesses] = useState([])
     const [winner, setWinner] = useState(false)
+    const [timer, setTimer] = useState(0)
+    const [timeToStop, setTimeToStop] = useState(0)
     const dispatch = useDispatch()
     let history = useHistory()
+
+    // starts timer
+    const startTimer = () => {
+        let interval = setInterval(() => {
+                setTimer(prev => prev + 1);
+            }, 1000);
+            
+            setTimeToStop(interval)
+    }
+
 
 // handles drag and drop funcitionality
     const handleOnDrag = (event) => {
@@ -54,11 +66,13 @@ function MasterMind () {
         event.preventDefault()
     }
 
-// random color generator
+// generates random colors and starts timer on load
     useEffect(() => {
         randomNumbers()
+        startTimer()
     }, [])
 
+// random color generator
     const randomNumbers = () => {
         const colors = ['red', 'blue', 'salmon', 'yellow', 'green', 'black']
 
@@ -77,10 +91,9 @@ function MasterMind () {
         let correct = 0
 
         let answersToCheck = [...answers]
-        const guessesArray = Object.values(guesses)
+        const guessesArray = [guesses.guess1, guesses.guess2, guesses.guess3, guesses.guess4]
 
         console.log('answers: ', answers)
-
 
         // checks guesses if they are in correct position
         guessesArray.forEach((guess, i) => {
@@ -99,7 +112,6 @@ function MasterMind () {
                 answersToCheck.splice(index, 1, 'correct color')
             }
         })
-
         
         // sets hints based on results
         switch (correct) {
@@ -164,21 +176,29 @@ function MasterMind () {
 
         if (correct === 4) {
             setWinner(true)
+            clearInterval(timeToStop)
         }
         else { 
             setRound(round + 1)
         }
     }
 
+
     const leaderBoard = () => {
         const game_id = 1
 
+        const gameResults = {
+            game_id: game_id,
+            round: round,
+            timer: timer
+        }
+
         dispatch({
             type: 'ADD_SCORE',
-            payload: {round, game_id}
+            payload: gameResults
         })
 
-        history.push({pathname: '/leaderBoard', state: round})
+        history.push({pathname: '/leaderBoard', state: gameResults})
     }
 
 
@@ -194,9 +214,12 @@ function MasterMind () {
         <div>
             <h2>Master Mind</h2>
 
+            <div id='timer'>{timer}</div>
+
             <div className='masterMind'>
                 <div className='masterMindBody'>
-                    <h2 className='masterMindTurn'>{winner ? `Winner!` : `Round ${round}`}</h2>
+                    
+                    <h2 className='masterMindTurn'><div>{winner ? `Winner!` : `Round ${round}`}</div><div id='timer'>({timer})</div></h2>
                     <div className='table'>
 
                     {/* game rows // game leaderboard */}
@@ -241,13 +264,13 @@ function MasterMind () {
                     id='black'></div>
                 </div>
 
-        {/* check answers */}
+        {/* check answers, if 4 are correct, show leaderboard  */}
                 <div className='submit'>
-                {
-                winner ? <h3 onClick={leaderBoard} className='checkAnswers'>Next</h3>
+                    {
+                    winner ? <h3 onClick={leaderBoard} className='checkAnswers'>Next</h3>
 
-                : <h3 onClick={checkAnswers} className='checkAnswers'>Check Answers</h3>
-                }
+                    : <h3 onClick={checkAnswers} className='checkAnswers'>Check Answers</h3>
+                    }
                 </div>
             </div>
         </ div>

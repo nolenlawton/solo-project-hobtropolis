@@ -11,11 +11,14 @@ function LogOutButton({user}) {
   }
 
   return (
+
     <span>
+      {/* profile picture */}
       <div>
         <img onClick={changePicture} id='pfp' src={user.pfp} />
       </div>
 
+      {/* username and logout */}
       <div>
         <div id='user'>
           {user.username}

@@ -18,7 +18,6 @@ import './App.css';
 
 function App() {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const user = useSelector(store => store.user);
 
@@ -36,13 +35,15 @@ function App() {
 
           <h1 className="admin">hobtropolis</h1>
 
-        {user.id ?
-            <>
-              <Link to='/' className='home'>Home</Link>
-              <LogoutButton user={user} />
-            </>
-            : <></>
-        } 
+          {/* home and logout buttons if logged in */}
+
+          {user.id ?
+              <>
+                <Link to='/' className='home'>Home</Link>
+                <LogoutButton user={user} />
+              </>
+              : <></>
+          } 
 
         </div>
 

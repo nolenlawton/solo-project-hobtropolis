@@ -27,8 +27,6 @@ function* fetchUser() {
 function* updatePicture(action) {
   const pfp = action.payload
 
-  console.log(pfp)
-
   try {
     yield axios.put(`/api/user/`, {pfp});
 

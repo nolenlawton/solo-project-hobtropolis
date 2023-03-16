@@ -14,7 +14,7 @@ th {
 
 td {
     text-align: center;
-    padding: 32px
+    padding: 32px;
 }
 
 .delete {
@@ -23,3 +23,17 @@ td {
     padding: 0;
 }
 
+.leaderboardPfp {
+    width: 60px;
+    height: 60px;
+    border: 2px solid black;
+}
+
+.pfpTd {
+    width: 0px;
+}
+
+#yourScore {
+    margin: auto;
+    margin-top: 32px;
+}

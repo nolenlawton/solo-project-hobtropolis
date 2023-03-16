@@ -10,8 +10,9 @@ function LeaderBoard () {
     const scores = useSelector(store => store.scores)
     const user = useSelector(store => store.user)
 
-    // console.log(location.state)
+    const gameResults = location.state
 
+    // get scores on page load
     useEffect(() => {
         getScores()
     }, [])
@@ -22,6 +23,7 @@ function LeaderBoard () {
         })
     }
 
+    // delete scores (admin only)
     const deleteScore = (event) => {
         dispatch({
             type: 'DELETE_SCORE',
@@ -33,22 +35,38 @@ function LeaderBoard () {
 
     return (
         <>
+
+            {/* if user comes from game, it will show results */}
+            {gameResults ? 
+                <h2 id="yourScore">
+                    <div>YOU WON IN</div>
+                    <div>{gameResults.round} Rounds</div>
+                    <div>{gameResults.timer} Seconds</div>
+                </h2> 
+                : <></>
+            }
+
             <h2>{'LeaderBoard'}</h2>
+
             <table>
                 <tbody>
                     <tr>
                         <th>Rank</th>
+                        <th></th>
                         <th>Name</th>
                         <th>Rounds</th>
+                        <th>Time</th>
                     </tr>
                     {scores.map((score, i) => {
                         return (
                         <tr key={i}>
                             <td>{i+1}.</td>
+                            <td className="pfpTd"><img className="leaderboardPfp" src={score.pfp} /></td>
                             <td>{score.username}</td>
+                            <td>{score.score}</td>
                             {user.id === 1 ?
-                                <><td>{score.score}</td><td className="delete"><button id={score.id} onClick={(event) => deleteScore(event)}>Delete</button></td></> :
-                                <td>{score.score}</td>
+                                <><td>{score.time}s</td><td className="delete"><button id={score.id} onClick={(event) => deleteScore(event)}>Delete</button></td></> :
+                                <td>{score.time}s</td>
                             }
                         
                         </tr>
