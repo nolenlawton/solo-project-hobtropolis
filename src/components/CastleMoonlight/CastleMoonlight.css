@@ -1,0 +1,11 @@
+.background {
+    width: 1000px;
+    height: 500px;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 32px;
+    margin: auto;
+    margin-top: 20px;
+    overflow: hidden;
+    background-color: white;
+}

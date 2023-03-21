@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Redirect, Route, Switch, Link} from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-
 
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import LogoutButton from '../LogOutButton/LogOutButton'
 import SelectGame from '../SelectGame/SelectGame';
-import MasterMind from '../MasterMind/MasterMind'
+import MasterMind from '../MasterMind/MasterMind';
+import CastleMoonlight from '../CastleMoonlight/CastleMoonlight';
 import LeaderBoard from '../LeaderBoard/LeaderBoard';
 import ProfilePicture from '../ProfilePicture/ProfilePicture';
 
@@ -78,6 +76,14 @@ function App() {
           <Route path='/masterMind' exact>
           {user.id ?
               <MasterMind />
+              :
+              <Redirect to="/login" />
+            }
+          </Route>
+
+          <Route path='/castleMoonlight' exact>
+          {user.id ?
+              <CastleMoonlight />
               :
               <Redirect to="/login" />
             }
