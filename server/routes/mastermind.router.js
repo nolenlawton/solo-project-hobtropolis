@@ -3,15 +3,19 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // gets top 5 scores based on game_id
-router.get('/', (req, res) => {
+router.get('/:game_id', (req, res) => {
+    console.log(req.params.game_id)
     const query = `
-        SELECT "score".id, "user".pfp, "user".username, "game".game, "score".score, "score".time FROM "score" 
+        SELECT "user".username, "user".pfp, "game".game, "score".score, "score".time FROM "score" 
         JOIN "user" ON "user".id = "score".user_id
         JOIN "game" ON "game".id = "score".game_id
-        ORDER BY "score" ASC, "time"
+        WHERE "game".id = $1
+        ORDER BY "score" ASC
         LIMIT 5;`
+
+    const params = [req.params.game_id]
   
-    pool.query(query)
+    pool.query(query, params)
     .then(result => {
         res.send(result.rows)
     }).catch(err => {
@@ -21,7 +25,6 @@ router.get('/', (req, res) => {
 
 // posts score on game completion
 router.post('/', (req, res) => {
-
     const query = `
     INSERT INTO "score" ("score", "time", "game_id", "user_id")
     VALUES ($1, $2, $3, $4)`

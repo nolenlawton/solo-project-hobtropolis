@@ -24,9 +24,10 @@ function* deleteScore(action) {
     }
 }
 
-function* getScores() {
+function* getScores(action) {
+    console.log(action.payload)
     try {
-        const results = yield axios.get('/masterMind');
+        const results = yield axios.get(`/masterMind/${action.payload}`);
 
         const scores = results.data
 

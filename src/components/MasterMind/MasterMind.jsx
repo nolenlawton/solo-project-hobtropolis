@@ -214,12 +214,10 @@ function MasterMind () {
         <div>
             <h2>Master Mind</h2>
 
-            <div id='timer'>{timer}</div>
-
             <div className='masterMind'>
                 <div className='masterMindBody'>
                     
-                    <h2 className='masterMindTurn'><div>{winner ? `Winner!` : `Round ${round}`}</div><div id='timer'>({timer})</div></h2>
+                    <h2 className='masterMindTurn'><div>{winner ? `Winner!` : `Round ${round}`}</div></h2>
                     <div className='table'>
 
                     {/* game rows // game leaderboard */}

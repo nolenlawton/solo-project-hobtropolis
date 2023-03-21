@@ -9,11 +9,46 @@ import gemImage from '../art/gem.png'
 import castleImage from '../art/castle.png'
 
 import { useEffect } from 'react'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+
 
 function CastleMoonlight () {
+    let time = 0
+    const [winningTime, setWinningTime] = useState(0)
+    const [totalGems, setTotalGems] = useState(0)
+    const [winner, setWinner] = useState(false)
+
+    const dispatch = useDispatch()
+
     useEffect(() => {
-        game()
+        game();
+        startTimer();
     }, [])
+
+     // starts timer
+     const startTimer = () => {
+        setInterval(() => {
+            time++
+        }, 1000);    
+    }
+
+    const next = () => {
+        console.log('gems:', totalGems, 'time:', winningTime, 'winner:', winner)
+
+        const game_id = 2
+
+        const gameResults = {
+            game_id: game_id,
+            round: totalGems,
+            timer: winningTime
+        }
+
+        dispatch({
+            type: 'ADD_SCORE',
+            payload: gameResults
+        })
+    }
     
     const game = () => {
         // game window
@@ -151,7 +186,7 @@ function CastleMoonlight () {
                     this.currentSprite = this.sprites.walk.right
                     this.motion = 2
 
-                    setInterval(
+                    setTimeout(
                         this.frame++,
                         1000
                     )
@@ -162,7 +197,7 @@ function CastleMoonlight () {
                     this.currentSprite = this.sprites.walk.left
                     this.motion = 1
 
-                    setInterval(
+                    setTimeout(
 
                         this.frame++,
                         1000
@@ -270,8 +305,6 @@ function CastleMoonlight () {
             }
         }
 
-
-
         const image = (imageSrc) => {
             const image = new Image ()
             image.src = imageSrc
@@ -280,14 +313,13 @@ function CastleMoonlight () {
 
         let player
         let castleFinish
-        let enemies
+        let enemies = []
         let platforms = []
         let backGrounds = []
-        let gems
-        let currentKey
+        let gems = []
         let collectedGems = [false, false, false, false, false]
-        let totalGems = 0
         let gemScoreboard = []
+        let currentKey
 
         // game state at start
         const start = () => {
@@ -372,9 +404,11 @@ function CastleMoonlight () {
 
         }
 
+        let animationLoop
+
         // animation loop
         const animate = () => {
-            requestAnimationFrame(animate)
+            animationLoop = requestAnimationFrame(animate)
 
             c.fillStyle = 'white'
             c.fillRect(0, 0, canvas.width, canvas.height)
@@ -408,7 +442,7 @@ function CastleMoonlight () {
 
             player.update()
 
-            totalGems = collectedGems.filter(gem => gem === true).length
+            setTotalGems(collectedGems.filter(gem => gem === true).length)
 
             // right left movement
             if (keys.right.pressed && player.position.x < 500) {
@@ -457,7 +491,9 @@ function CastleMoonlight () {
 
 
             if (player.position.x === castleFinish.position.x + (castleFinish.width/2)) {
-                console.log('winner! gems:', totalGems)
+                setWinningTime(time)
+                setWinner(true)
+                stopAnimation()
             }
 
             gems.forEach((gem, i) => {
@@ -477,6 +513,11 @@ function CastleMoonlight () {
                     start()
                 }
             })
+
+        }
+
+        const stopAnimation = () => {
+            cancelAnimationFrame(animationLoop);
         }
  
 
@@ -487,9 +528,9 @@ function CastleMoonlight () {
         document.addEventListener('keydown', ({ key }) => {
             switch (key) {
                 case 'ArrowUp':
-                    if (player.velocity.y === 0) {
+                    // if (player.velocity.y === 0) {
                         player.velocity.y = -40
-                    }
+                    // }
                     break;
                 case 'ArrowLeft':
                     keys.left.pressed = true
@@ -533,10 +574,20 @@ function CastleMoonlight () {
 
     return(
         <>
-            <h2>Galactic Goblin</h2>
+            <h2>Castle Moonlight</h2>
+
             <canvas className='background'>
                 
             </canvas>
+
+            {winner ?
+            <div className='winningScore'>
+                <h1>You Won!</h1>
+                <div>{totalGems} gems in {winningTime} seconds</div>
+                <button id='next' onClick={next}>Next</button>
+            </div>
+            : <></>
+            }
         </>
     )
 }

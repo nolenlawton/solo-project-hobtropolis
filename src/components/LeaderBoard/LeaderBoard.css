@@ -1,5 +1,5 @@
 table{
-    background-color: rgb(119, 198, 224);
+    background-color: rgb(100, 100, 230);
     margin: auto;
     font-size: 24px;
     margin-top: 32px;
@@ -23,6 +23,17 @@ td {
     padding: 0;
 }
 
+.deleteButton {
+    background-color: rgb(234, 78, 78);
+    border: 0px;
+    border-radius: 8px;
+    padding: 4px;
+    color: white;
+    margin-right: 20px;
+    margin-left: 20px;
+    font-size: 16px;
+}
+
 .leaderboardPfp {
     width: 60px;
     height: 60px;
@@ -36,4 +47,21 @@ td {
 #yourScore {
     margin: auto;
     margin-top: 32px;
+}
+
+.gameSelect {
+    display: flex;
+    justify-content: space-around;
+    font-size: 24px;
+    background-color: rgb(100, 100, 230);
+    width: 60%;
+    margin: auto;
+    padding: 8px;
+    border-radius: 16px;
+    margin-top: 24px;
+    cursor: pointer;
+}
+
+.selectedGame {
+    color: rgb(122, 224, 119)
 }
