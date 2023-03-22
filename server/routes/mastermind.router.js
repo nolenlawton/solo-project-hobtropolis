@@ -4,18 +4,28 @@ const router = express.Router();
 
 // gets top 5 scores based on game_id
 router.get('/:game_id', (req, res) => {
-    console.log(req.params.game_id)
-    const query = `
-        SELECT "user".username, "user".pfp, "game".game, "score".score, "score".time FROM "score" 
-        JOIN "user" ON "user".id = "score".user_id
-        JOIN "game" ON "game".id = "score".game_id
-        WHERE "game".id = $1
-        ORDER BY "score" ASC
-        LIMIT 5;`
+    let query
 
-    const params = [req.params.game_id]
+    if(req.params.game_id === '1') {
+        query = `
+            SELECT "score".id, "user".username, "user".pfp, "game".game, "score".score, "score".time FROM "score" 
+            JOIN "user" ON "user".id = "score".user_id
+            JOIN "game" ON "game".id = "score".game_id
+            WHERE "game".id = 1
+            ORDER BY "score".score ASC, "score".time
+            LIMIT 5;`
+    } 
+    if(req.params.game_id === '2') {
+        query = `
+            SELECT "score".id, "user".username, "user".pfp, "game".game, "score".score, "score".time FROM "score" 
+            JOIN "user" ON "user".id = "score".user_id
+            JOIN "game" ON "game".id = "score".game_id
+            WHERE "game".id = 2
+            ORDER BY "score".score DESC, "score".time ASC
+            LIMIT 5;`
+    }
   
-    pool.query(query, params)
+    pool.query(query)
     .then(result => {
         res.send(result.rows)
     }).catch(err => {

@@ -11,41 +11,34 @@ function LeaderBoard () {
     const scores = useSelector(store => store.scores)
     const user = useSelector(store => store.user)
 
+    const [game_id, setGame] = useState(1)
+    const [scoreToDelete, setScoreToDelete] = useState({})
+
     const gameResults = location.state
 
-    const [game, setGame] = useState(1)
 
     // get scores on page load
     useEffect(() => {
         getScores()
-    }, [])
+    }, [game_id])
 
     const getScores = () => {
         dispatch({
             type: 'GET_SCORES',
-            payload: game
+            payload: game_id
         })
     }
 
     // delete scores (admin only)
     const deleteScore = (event) => {
+        scoreToDelete.game_id = game_id
+        scoreToDelete.score_id = event.target.id
+
         dispatch({
             type: 'DELETE_SCORE',
-            payload: event.target.id
+            payload: scoreToDelete
         })
     }
-
-    const game1 = () => {
-        setGame(1)
-        getScores()
-    }
-
-    const game2 = () => {
-        setGame(2)
-        getScores()
-    }
-
-
 
     return (
         <>
@@ -60,11 +53,14 @@ function LeaderBoard () {
                 : <></>
             } */}
 
-            <h2>{'LeaderBoard'}</h2>
+            <h2>
+                <div>{game_id === 1 ? 'Master Mind' : 'Castle Moonlight'}</div>
+                <div>LeaderBoard</div>
+            </h2>
 
             <div className="gameSelect">
-                <div onClick={game1} className={game === 1 ? 'selectedGame' : ''} >Master Mind</div>
-                <div onClick={game2} className={game === 2 ? 'selectedGame' : ''} >Castle Moonlight</div>
+                <div onClick={() => setGame(1)} className={game_id === 1 ? 'selectedGame' : ''} >Master Mind</div>
+                <div onClick={() => setGame(2)} className={game_id === 2 ? 'selectedGame' : ''} >Castle Moonlight</div>
             </div>
 
             <table>
@@ -73,7 +69,7 @@ function LeaderBoard () {
                         <th>Rank</th>
                         <th></th>
                         <th>Name</th>
-                        <th>Rounds</th>
+                        {game_id === 1 ? <th>Rounds</th> : <th>Gems</th>}
                         <th>Time</th>
                         {user.id === 1 ?
                             <th></th> : <></>

@@ -528,9 +528,9 @@ function CastleMoonlight () {
         document.addEventListener('keydown', ({ key }) => {
             switch (key) {
                 case 'ArrowUp':
-                    // if (player.velocity.y === 0) {
+                    if (player.velocity.y === 0) {
                         player.velocity.y = -40
-                    // }
+                    }
                     break;
                 case 'ArrowLeft':
                     keys.left.pressed = true

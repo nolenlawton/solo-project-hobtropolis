@@ -2,10 +2,11 @@ import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* addScore(action) {
+    
     try {
         yield axios.post('/masterMind', action.payload);
 
-        yield put({ type: 'GET_SCORES' });
+        yield put({ type: 'GET_SCORES', payload: action.payload.game_id });
 
     } catch {
         console.log('get all error');
@@ -15,9 +16,9 @@ function* addScore(action) {
 function* deleteScore(action) {
 
     try {
-        yield axios.delete(`/masterMind/${action.payload}`);
+        yield axios.delete(`/masterMind/${action.payload.score_id}`);
 
-        yield put({ type: 'GET_SCORES' });
+        yield put({ type: 'GET_SCORES', payload: action.payload.game_id });
 
     } catch {
         console.log('get all error');
@@ -25,7 +26,6 @@ function* deleteScore(action) {
 }
 
 function* getScores(action) {
-    console.log(action.payload)
     try {
         const results = yield axios.get(`/masterMind/${action.payload}`);
 
