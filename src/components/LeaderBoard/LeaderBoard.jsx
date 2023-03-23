@@ -10,12 +10,10 @@ function LeaderBoard () {
     const location = useLocation()
     const scores = useSelector(store => store.scores)
     const user = useSelector(store => store.user)
-
     const [game_id, setGame] = useState(1)
     const [scoreToDelete, setScoreToDelete] = useState({})
 
     const gameResults = location.state
-
 
     // get scores on page load
     useEffect(() => {
@@ -34,6 +32,7 @@ function LeaderBoard () {
         scoreToDelete.game_id = game_id
         scoreToDelete.score_id = event.target.id
 
+        console.log('delete:', scoreToDelete)
         dispatch({
             type: 'DELETE_SCORE',
             payload: scoreToDelete

@@ -11,6 +11,7 @@ import castleImage from '../art/castle.png'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 
 function CastleMoonlight () {
@@ -20,6 +21,7 @@ function CastleMoonlight () {
     const [winner, setWinner] = useState(false)
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => {
         game();
@@ -48,6 +50,8 @@ function CastleMoonlight () {
             type: 'ADD_SCORE',
             payload: gameResults
         })
+
+        history.push({pathname: '/leaderBoard', state: gameResults})
     }
     
     const game = () => {

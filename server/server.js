@@ -8,7 +8,7 @@ const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
 // Route includes
-const mmRouter = require('./routes/mastermind.router')
+const scoresRouter = require('./routes/scores.router')
 const userRouter = require('./routes/user.router');
 
 // Body parser middleware
@@ -24,7 +24,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
-app.use('/masterMind', mmRouter);
+app.use('/scores', scoresRouter);
 
 // Serve static files
 app.use(express.static('build'));

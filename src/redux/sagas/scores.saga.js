@@ -4,7 +4,7 @@ import axios from 'axios';
 function* addScore(action) {
     
     try {
-        yield axios.post('/masterMind', action.payload);
+        yield axios.post('/scores', action.payload);
 
         yield put({ type: 'GET_SCORES', payload: action.payload.game_id });
 
@@ -16,7 +16,7 @@ function* addScore(action) {
 function* deleteScore(action) {
 
     try {
-        yield axios.delete(`/masterMind/${action.payload.score_id}`);
+        yield axios.delete(`/scores/${action.payload.score_id}`);
 
         yield put({ type: 'GET_SCORES', payload: action.payload.game_id });
 
@@ -27,7 +27,7 @@ function* deleteScore(action) {
 
 function* getScores(action) {
     try {
-        const results = yield axios.get(`/masterMind/${action.payload}`);
+        const results = yield axios.get(`/scores/${action.payload}`);
 
         const scores = results.data
 
