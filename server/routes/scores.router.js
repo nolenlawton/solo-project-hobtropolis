@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 // gets top 5 scores based on game_id
 router.get('/:game_id', (req, res) => {
@@ -12,7 +13,7 @@ router.get('/:game_id', (req, res) => {
             JOIN "user" ON "user".id = "score".user_id
             JOIN "game" ON "game".id = "score".game_id
             WHERE "game".id = 1
-            ORDER BY "score".score ASC, "score".time
+            ORDER BY "score".score ASC, "score".time ASC
             LIMIT 5;`
     } 
     if(req.params.game_id === '2') {
@@ -50,7 +51,7 @@ router.post('/', (req, res) => {
 });
 
 // admin can delete scores from leaderboard
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
     const query = `
     DELETE FROM "score"

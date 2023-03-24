@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Redirect, Route, Switch, Link} from 'react-router-dom';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { useDispatch, useSelector } from 'react-redux';
 
 import LoginPage from '../LoginPage/LoginPage';
@@ -8,6 +9,7 @@ import LogoutButton from '../LogOutButton/LogOutButton'
 import SelectGame from '../SelectGame/SelectGame';
 import MasterMind from '../MasterMind/MasterMind';
 import CastleMoonlight from '../CastleMoonlight/CastleMoonlight';
+import Sudoku from '../Sudoku/Sudoku';
 import LeaderBoard from '../LeaderBoard/LeaderBoard';
 import ProfilePicture from '../ProfilePicture/ProfilePicture';
 
@@ -84,6 +86,14 @@ function App() {
           <Route path='/castleMoonlight' exact>
           {user.id ?
               <CastleMoonlight />
+              :
+              <Redirect to="/login" />
+            }
+          </Route>
+
+          <Route path='/sudoku' exact>
+          {user.id ?
+              <Sudoku />
               :
               <Redirect to="/login" />
             }

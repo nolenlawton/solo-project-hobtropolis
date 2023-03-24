@@ -53,22 +53,29 @@ function LeaderBoard () {
             } */}
 
             <h2>
-                <div>{game_id === 1 ? 'Master Mind' : 'Castle Moonlight'}</div>
+                <div>
+                    {game_id === 1 ? 'Master Mind' : ''}
+                    {game_id === 2 ? 'Castle Moonlight' : ''}
+                    {game_id === 3 ? 'Sudoku' : ''}
+                </div>
                 <div>LeaderBoard</div>
             </h2>
 
             <div className="gameSelect">
                 <div onClick={() => setGame(1)} className={game_id === 1 ? 'selectedGame' : ''} >Master Mind</div>
+                <div onClick={() => setGame(3)} className={game_id === 3 ? 'selectedGame' : ''} >Sudoku</div>
                 <div onClick={() => setGame(2)} className={game_id === 2 ? 'selectedGame' : ''} >Castle Moonlight</div>
             </div>
 
+            {game_id === 1 || game_id === 2 ?
             <table>
                 <tbody>
                     <tr>
                         <th>Rank</th>
                         <th></th>
                         <th>Name</th>
-                        {game_id === 1 ? <th>Rounds</th> : <th>Gems</th>}
+                        {game_id === 1 ? <th>Rounds</th> : ''}
+                        {game_id === 2 ? <th>Gems</th> : ''}
                         <th>Time</th>
                         {user.id === 1 ?
                             <th></th> : <></>
@@ -92,6 +99,7 @@ function LeaderBoard () {
                     
                 </tbody>
             </table>
+        : <></>}
         </>
     )
 }

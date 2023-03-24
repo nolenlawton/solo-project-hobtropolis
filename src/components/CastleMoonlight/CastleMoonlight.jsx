@@ -493,7 +493,7 @@ function CastleMoonlight () {
                 }
             })
 
-
+            
             if (player.position.x === castleFinish.position.x + (castleFinish.width/2)) {
                 setWinningTime(time)
                 setWinner(true)

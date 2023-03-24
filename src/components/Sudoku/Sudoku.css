@@ -1,0 +1,41 @@
+#table {
+    margin: auto;
+    margin-top: 32px;
+    border-radius: 16px;
+    padding: 32px;
+    width: 424px;
+    height: 450px;
+    background-color: rgb(100, 100, 230);;
+}
+
+/* .row {
+    width: 50px;
+    height: 50px;
+    border: 1px solid grey;
+}
+
+.column {
+    width: 50px;
+    height: 50px;
+    border: 1px solid grey;
+} */
+
+#table input {
+    width: 30px;
+    height: 30px;
+    margin: 0px;
+    border-radius: 0px;
+    border: 1px solid black;
+    font-size: 24px;
+    background-color: rgb(215, 215, 246);
+}
+
+#numbers {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 32px;
+}
+
+#num1, #num2, #num3, #num4, #num5, #num6, #num7, #num8, #num9 {
+    cursor: pointer;
+}
