@@ -4,6 +4,7 @@ import peach from '../art/peach.jpg'
 import gary from '../art/gary.jpg'
 import LOU from '../art/lastOfUs.jpg'
 import winston from '../art/winston.jpg'
+import bear from '../art/bear.jpg'
 
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -41,6 +42,10 @@ function ProfilePicture () {
             <img onClick={() => setPicture(jon)} className={picture === jon ? "imageSelection selected" : "imageSelection"} src={jon} />
             <img onClick={() => setPicture(peach)} className={picture === peach ? "imageSelection selected" : "imageSelection"} src={peach} />
             <img onClick={() => setPicture(winston)} className={picture === winston ? "imageSelection selected" : "imageSelection"} src={winston} />
+        </div>
+
+        <div className="pictureSelection">
+            <img onClick={() => setPicture(bear)} className={picture === bear ? "imageSelection selected" : "imageSelection"} src={bear} />
         </div>
 
         <div id='save'><button onClick={savePicture}>Save</button></div>

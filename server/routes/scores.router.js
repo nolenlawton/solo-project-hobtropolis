@@ -4,29 +4,54 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 // gets top 5 scores based on game_id
-router.get('/:game_id', (req, res) => {
-    let query
+router.get('/:game_id/:myScores', (req, res) => {
 
-    if(req.params.game_id === '1') {
-        query = `
-            SELECT "score".id, "user".username, "user".pfp, "game".game, "score".score, "score".time FROM "score" 
-            JOIN "user" ON "user".id = "score".user_id
-            JOIN "game" ON "game".id = "score".game_id
-            WHERE "game".id = 1
-            ORDER BY "score".score ASC, "score".time ASC
-            LIMIT 5;`
-    } 
-    if(req.params.game_id === '2') {
-        query = `
-            SELECT "score".id, "user".username, "user".pfp, "game".game, "score".score, "score".time FROM "score" 
-            JOIN "user" ON "user".id = "score".user_id
-            JOIN "game" ON "game".id = "score".game_id
-            WHERE "game".id = 2
-            ORDER BY "score".score DESC, "score".time ASC
-            LIMIT 5;`
+    let query
+    let params
+
+    if(req.params.myScores === 'false') {
+        if(req.params.game_id === '1') {
+            query = `
+                SELECT "score".id, "user".username, "user".pfp, "game".game, "score".score, "score".time FROM "score" 
+                JOIN "user" ON "user".id = "score".user_id
+                JOIN "game" ON "game".id = "score".game_id
+                WHERE "game".id = 1
+                ORDER BY "score".score ASC, "score".time ASC
+                LIMIT 5;`
+        } 
+        if(req.params.game_id === '2') {
+            query = `
+                SELECT "score".id, "user".username, "user".pfp, "game".game, "score".score, "score".time FROM "score" 
+                JOIN "user" ON "user".id = "score".user_id
+                JOIN "game" ON "game".id = "score".game_id
+                WHERE "game".id = 2
+                ORDER BY "score".score DESC, "score".time ASC
+                LIMIT 5;`
+        }
+    } else if (req.params.myScores === 'true') {
+        console.log('params', params)
+        if(req.params.game_id === '1') {
+            query = `
+                SELECT "score".id, "user".username, "user".pfp, "game".game, "score".score, "score".time FROM "score" 
+                JOIN "user" ON "user".id = "score".user_id
+                JOIN "game" ON "game".id = "score".game_id
+                WHERE "game".id = 1 AND "user".id = $1
+                ORDER BY "score".score ASC, "score".time ASC`
+        } 
+        if(req.params.game_id === '2') {
+            query = `
+                SELECT "score".id, "user".username, "user".pfp, "game".game, "score".score, "score".time FROM "score" 
+                JOIN "user" ON "user".id = "score".user_id
+                JOIN "game" ON "game".id = "score".game_id
+                WHERE "game".id = 2 AND "user".id = $1
+                ORDER BY "score".score DESC, "score".time ASC`
+        }
+        params = [req.user.id]
     }
+
+    console.log('final params:', params)
   
-    pool.query(query)
+    pool.query(query, params)
     .then(result => {
         res.send(result.rows)
     }).catch(err => {

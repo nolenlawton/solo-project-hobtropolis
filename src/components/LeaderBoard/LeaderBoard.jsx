@@ -11,6 +11,7 @@ function LeaderBoard () {
     const scores = useSelector(store => store.scores)
     const user = useSelector(store => store.user)
     const [game_id, setGame] = useState(1)
+    const [myScores, setMyScores] = useState(false)
     const [scoreToDelete, setScoreToDelete] = useState({})
 
     const gameResults = location.state
@@ -18,12 +19,17 @@ function LeaderBoard () {
     // get scores on page load
     useEffect(() => {
         getScores()
-    }, [game_id])
+    }, [game_id, myScores])
 
     const getScores = () => {
+        console.log(game_id, myScores)
+        const scoresToGet = {
+            game_id,
+            myScores
+        }
         dispatch({
             type: 'GET_SCORES',
-            payload: game_id
+            payload: scoresToGet
         })
     }
 
@@ -31,6 +37,7 @@ function LeaderBoard () {
     const deleteScore = (event) => {
         scoreToDelete.game_id = game_id
         scoreToDelete.score_id = event.target.id
+        scoreToDelete.myScores = myScores
 
         console.log('delete:', scoreToDelete)
         dispatch({
@@ -60,6 +67,10 @@ function LeaderBoard () {
                 </div>
                 <div>LeaderBoard</div>
             </h2>
+
+            <div className="myScores">
+                <div onClick={() => setMyScores(!myScores)} className={myScores === true ? 'selectedGame' : ''} >Show My Scores</div>
+            </div>
 
             <div className="gameSelect">
                 <div onClick={() => setGame(1)} className={game_id === 1 ? 'selectedGame' : ''} >Master Mind</div>

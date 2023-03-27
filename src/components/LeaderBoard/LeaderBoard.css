@@ -66,3 +66,14 @@ td {
 .selectedGame {
     color: rgb(122, 224, 119)
 }
+
+.myScores {
+    position: fixed;
+    left: 100px;
+    top: 50%;
+    background-color: rgb(100, 100, 230);
+    font-size: 16px;
+    padding: 16px;
+    border-radius: 16px;
+    cursor: pointer;
+}

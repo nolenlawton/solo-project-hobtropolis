@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import game1Image from '../art/mastermind.png'
 import game2Image from '../art/sudoku.png'
 import game3Image from '../art/castleMoonlight.png'
+import game4Image from '../art/construction.png'
 
 function SelectGame () {
     return (
@@ -30,7 +31,10 @@ function SelectGame () {
             </Link>
 
             <Link to='/basketball'>
-                <div className="gameToSelect">Basketball</div>
+                <div className="gameToSelect">
+                    Basketball
+                    <img src={game4Image} />
+                </div>
             </Link>
         </div>
 
